@@ -16,7 +16,7 @@ import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
-import com.google.builditbigger.backend.myApi.MyApi;
+import com.google.builditbigger.backend.jokeApi.JokeApi;
 
 import java.io.IOException;
 
@@ -34,7 +34,7 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(getActivity(), "Manfred"));
+      //  new EndpointsAsyncTask().execute(new Pair<Context, String>(getActivity(), "Manfred"));
         AdView mAdView = (AdView) root.findViewById(R.id.adView);
         // Create an ad request. Check logcat output for the hashed device ID to
         // get test ads on a physical device. e.g.
@@ -45,15 +45,15 @@ public class MainActivityFragment extends Fragment {
         mAdView.loadAd(adRequest);
         return root;
     }
-
-    class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
-        private  MyApi myApiService = null;
+//for test backend 
+    /*class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+        private  JokeApi myApiService = null;
         private Context context;
 
         @Override
         protected String doInBackground(Pair<Context, String>... params) {
             if(myApiService == null) {  // Only do this once
-                MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
+                JokeApi.Builder builder = new JokeApi.Builder(AndroidHttp.newCompatibleTransport(),
                         new AndroidJsonFactory(), null)
                         // options for running against local devappserver
                         // - 10.0.2.2 is localhost's IP address in Android emulator
@@ -75,7 +75,8 @@ public class MainActivityFragment extends Fragment {
             String name = params[0].second;
 
             try {
-                return myApiService.sayHi(name).execute().getData();
+               // return myApiService.sayHi(name).execute().getData();
+                return myApiService.getJoke().execute().getData();
             } catch (IOException e) {
                 return e.getMessage();
             }
@@ -85,5 +86,5 @@ public class MainActivityFragment extends Fragment {
         protected void onPostExecute(String result) {
             Toast.makeText(context, result, Toast.LENGTH_LONG).show();
         }
-    }
+    }*/
 }
