@@ -1,6 +1,7 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,6 +13,8 @@ import com.example.android.androiddisplayjokelibrary.DisplayJokeActivity;
 
 public class MainActivity extends ActionBarActivity {
 
+
+  //private A mEndpointsAsyncTask;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,15 +45,31 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    public void tellJoke(View view){
-        Toast.makeText(this, "derp", Toast.LENGTH_SHORT).show();
 
-        JokeTeller joker = new JokeTeller();
-        String joke= joker.getJoke();
+    public void tellJoke(View view) {
 
-        Intent intent = new Intent(this, DisplayJokeActivity.class);
-        intent.putExtra(DisplayJokeActivity.JOKE_KEY, joke);
-        startActivity(intent);
+      new AsyncJokeTask(new AsyncTaskCompleteListener<String>() {
+          @Override
+          public void onTaskComplete(String result) {
+              Intent intent = new Intent(getApplicationContext(), DisplayJokeActivity.class);
+              intent.putExtra(DisplayJokeActivity.JOKE_KEY, result);
+              startActivity(intent);
+          }
+
+          @Override
+          public void onTaskBefore() {
+
+          }
+
+          @Override
+          public void onAsyncExceptionRaised(Exception e) {
+
+          }
+      }).downloadJoke();
+
     }
 
-}
+
+    }
+
+
