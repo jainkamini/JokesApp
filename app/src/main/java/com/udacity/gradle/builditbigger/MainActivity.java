@@ -57,12 +57,12 @@ public class MainActivity extends ActionBarActivity {
           }
 
           @Override
-          public void onTaskBefore() {
+          public void onAsyncExceptionRaised(Exception e) {
 
           }
 
           @Override
-          public void onAsyncExceptionRaised(Exception e) {
+          public void onTaskBefore() {
 
           }
       }).downloadJoke();
