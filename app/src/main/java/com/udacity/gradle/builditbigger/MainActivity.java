@@ -58,7 +58,7 @@ public class MainActivity extends ActionBarActivity {
 
           @Override
           public void onAsyncExceptionRaised(Exception e) {
-
+              Toast.makeText(getApplicationContext(), e.getMessage(),Toast.LENGTH_SHORT).show();
           }
 
           @Override

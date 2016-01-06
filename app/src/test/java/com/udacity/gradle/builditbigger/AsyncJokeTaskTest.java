@@ -2,6 +2,7 @@ package com.udacity.gradle.builditbigger;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.test.AndroidTestCase;
 import android.test.UiThreadTest;
 import android.text.TextUtils;
 import android.util.Log;
@@ -23,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Kamini on 12/30/2015.
  */
-public class AsyncJokeTaskTest extends TestCase  {
+public class AsyncJokeTaskTest extends AndroidTestCase {
 
   //  extends ApplicationTestCase<application> {
 
@@ -42,7 +43,7 @@ public class AsyncJokeTaskTest extends TestCase  {
     }
 
 
-
+    @UiThreadTest
     public void testDownload() throws InterruptedException {
         new AsyncJokeTask(new AsyncTaskCompleteListener<String>() {
             @Override
@@ -57,10 +58,12 @@ public class AsyncJokeTaskTest extends TestCase  {
 
             @Override
             public void onTaskBefore() {
-
+                joke= "";
             }
         }).downloadJoke();
         signal.await();
-        assertFalse(TextUtils.isEmpty(joke));
+        assertNotNull(joke);
+      //  assertTrue(joke!=null);
+       // assertFalse(TextUtils.isEmpty(joke));
     }
 }
