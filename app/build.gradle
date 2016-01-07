@@ -23,6 +23,15 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
+
+    productFlavors{
+        free{
+            applicationId "com.udacity.gradle.builditbigger.free"
+        }
+        paid{
+            applicationId "com.udacity.gradle.builditbigger.paid"
+        }
+    }
 }
 
 dependencies {
