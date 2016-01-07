@@ -62,8 +62,8 @@ public class AsyncJokeTaskTest extends AndroidTestCase {
             }
         }).downloadJoke();
         signal.await();
-        assertNotNull(joke);
-      //  assertTrue(joke!=null);
+       // assertNotNull(joke);
+       assertTrue(joke!=null);
        // assertFalse(TextUtils.isEmpty(joke));
     }
 }

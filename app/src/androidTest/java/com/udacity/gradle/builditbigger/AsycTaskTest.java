@@ -2,6 +2,7 @@ package com.udacity.gradle.builditbigger;
 
 import android.test.AndroidTestCase;
 import android.test.UiThreadTest;
+import android.util.Log;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -26,7 +27,7 @@ public class AsycTaskTest extends AndroidTestCase implements AsyncTaskCompleteLi
     public void testDownload() throws InterruptedException {
         downloader.downloadJoke();
         signal.await(30, TimeUnit.SECONDS);
-
+        Log.e(downloader.LOG_TAG,joke);
         assertTrue("Valid joke is returned", joke != null);
     }
 
@@ -34,6 +35,7 @@ public class AsycTaskTest extends AndroidTestCase implements AsyncTaskCompleteLi
     public void onTaskComplete(Object result) {
 
         joke = (String)result;
+        Log.e(downloader.LOG_TAG,joke);
         signal.countDown();
     }
 

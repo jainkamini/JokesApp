@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class AsyncJokeTask {
 
-    private static final String LOG_TAG = EndpointsAsyncTask.class.getSimpleName();
+    public static final String LOG_TAG = EndpointsAsyncTask.class.getSimpleName();
     private static final boolean DEBUG = true; // Set this to false to disable logs.
     private static JokeApi myApiService = null;
 
@@ -41,9 +41,9 @@ public class AsyncJokeTask {
                         // - 10.0.2.2 is localhost's IP address in Android emulator
                         // - 10.0.3.2 is localhost's IP address in Genymotion emulator
                         // - turn off compression when running against local devappserver
-                      //  .setRootUrl("http://10.0.2.2:8080/_ah/api/")
+                       .setRootUrl("http://10.0.2.2:8080/_ah/api/")
                        //.setRootUrl("https://android-app-backend.appspot.com/_ah/api/")
-                       .setRootUrl("http://10.0.3.2:8080/_ah/api/")
+                     //  .setRootUrl("http://10.0.3.2:8080/_ah/api/")
                       // .setRootUrl("http://192.168.2.115:8080/_ah/api/")
                        // .setRootUrl("http://192.168.45.2.:8080/_ah/api/")
                         .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
