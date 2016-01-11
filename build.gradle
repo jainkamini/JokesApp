@@ -17,3 +17,15 @@ allprojects {
         jcenter()
     }
 }
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+
+task runConnectedTest (dependsOn: [':backend:appengineStop', ':backend:appengineRun',':app:connectedCheck']) {
+    project(":backend").afterEvaluate { backend ->
+        backend.extensions.appengine.daemon = true
+    }
+    tasks.getByPath(':app:connectedCheck').dependsOn ':backend:appengineRun'
+    tasks.getByPath(':backend:appengineStop').mustRunAfter tasks.getByPath(':app:connectedCheck')
+}

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.example.JokeTeller;
 import com.example.android.androiddisplayjokelibrary.DisplayJokeActivity;
@@ -18,11 +19,13 @@ public class MainActivity extends ActionBarActivity {
 
     InterstitialAd mInterstitialAd;
     Intent intent ;
+    private ProgressBar mProgressBar;
   //private A mEndpointsAsyncTask;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
 
@@ -78,6 +81,7 @@ public class MainActivity extends ActionBarActivity {
       new AsyncJokeTask(new AsyncTaskCompleteListener<String>() {
           @Override
           public void onTaskComplete(String result) {
+              mProgressBar.setVisibility(ProgressBar.INVISIBLE);
               intent = new Intent(getApplicationContext(), DisplayJokeActivity.class);
             //  Intent intent = new Intent(getApplicationContext(), DisplayJokeActivity.class);
               intent.putExtra(DisplayJokeActivity.JOKE_KEY, result);
@@ -89,12 +93,13 @@ public class MainActivity extends ActionBarActivity {
 
           @Override
           public void onAsyncExceptionRaised(Exception e) {
+              mProgressBar.setVisibility(ProgressBar.INVISIBLE);
               Toast.makeText(getApplicationContext(), e.getMessage(),Toast.LENGTH_SHORT).show();
           }
 
           @Override
           public void onTaskBefore() {
-
+              mProgressBar.setVisibility(ProgressBar.VISIBLE);
           }
       }).downloadJoke();
 
