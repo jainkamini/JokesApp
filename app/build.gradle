@@ -24,7 +24,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
 
-    productFlavors{
+   productFlavors{
         free{
             applicationId "com.udacity.gradle.builditbigger.free"
         }
@@ -32,6 +32,13 @@ android {
             applicationId "com.udacity.gradle.builditbigger.paid"
         }
     }
+
+    /*sourceSets {
+        paid {
+            manifest.srcFile 'src/paid/AndroidManifest.xml'
+            java.srcDirs = ['src/paid/java']
+        }
+    }*/
 }
 
 dependencies {
@@ -46,10 +53,10 @@ dependencies {
    // testCompile 'junit:junit:4.12'
     //compile 'com.google.android.gms:play-services-ads:8.3.0'
     compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.google.android.gms:play-services:7.5.0'
+   // compile 'com.google.android.gms:play-services:7.5.0'
     compile project(path: ':backend', configuration: 'android-endpoints')
-
-
+    freeCompile 'com.google.android.gms:play-services-ads:8.4.0'
+   // compile 'com.google.android.gms:play-services-ads:8.3.0'
 
   /*  testCompile "org.mockito:mockito-core:1.9.5"
     testCompile "org.robolectric:robolectric:3.0-rc2"*/
